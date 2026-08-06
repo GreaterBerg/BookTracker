@@ -1,4 +1,4 @@
-import fetchFn from '../components/fetchFn'
+import fetchFn from '../fetchFn'
 import { useQuery } from '@tanstack/react-query'
 
 const HomePage = () => {
