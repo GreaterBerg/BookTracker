@@ -1,13 +1,18 @@
 import { useState, useEffect, createContext, useContext, type ReactNode } from 'react';
 import { supabase } from '../supabaseClient';
 
-const AuthContext = createContext(null)
+const AuthContext = createContext<AuthContextType | null>(null)
+type AuthContextType = {
+    signUpNewUser: (email: string, password: string) => Promise<{success: boolean, data: any}>;
+    signInUser: (email: string, password: string) => Promise<{success: boolean, data?: any, error?: string}>;
+    signOut: () => void;
+}
 
 export const AuthContextProvider = ({children}: {children: ReactNode}) => {
-    const [session, setSession] = useState(undefined);
+    const [session, setSession] = useState<any | null>(null);
 
 
-    const signUpNewUser = async ({ email, password }) => {
+    const signUpNewUser = async ( email: string, password: string ) => {
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
@@ -17,7 +22,7 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
         return {success: true, data}
     };
 
-    const signInUser = async ({ email, password }) => {
+    const signInUser = async ( email: string, password: string ) => {
         try {
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: email,
@@ -45,14 +50,14 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
     }, [])
 
 
-    const signOut = () => {
-        const { error } = supabase.auth.signOut();
+    const signOut = async () => {
+        const { error } = await supabase.auth.signOut();
 
         if (error) { console.error(`There was an error: ${error}`) }
     }
 
     return (
-        <AuthContext.Provider value={{session, signUpNewUser, signInUser, signOut}}>
+        <AuthContext.Provider value={{ session, signUpNewUser, signInUser, signOut }}>
             {children}
         </AuthContext.Provider>
     )

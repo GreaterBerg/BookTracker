@@ -6,19 +6,19 @@ const SignUp = () => {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const { session, signUpNewUser } = UserAuth();
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e : React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
     try {
 
-      const result = signUpNewUser(email, password);
+      const result = await signUpNewUser(email, password);
 
       if (result.success) {
         navigate("/home")
