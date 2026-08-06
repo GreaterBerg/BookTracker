@@ -3,6 +3,7 @@ import { supabase } from '../supabaseClient';
 
 const AuthContext = createContext<AuthContextType | null>(null)
 type AuthContextType = {
+    session: any | null;
     signUpNewUser: (email: string, password: string) => Promise<{success: boolean, data: any}>;
     signInUser: (email: string, password: string) => Promise<{success: boolean, data?: any, error?: string}>;
     signOut: () => void;
@@ -18,7 +19,9 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
             password: password,
         })
 
-        if (error) { return {success: false, data} }
+        if (error) { console.error("Error at signing up"); return {success: false, data} }
+
+        console.log("Sign Up success!")
         return {success: true, data}
     };
 
