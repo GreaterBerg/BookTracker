@@ -2,7 +2,7 @@ import { useState, useEffect, createContext, useContext, type ReactNode } from '
 import { supabase } from '../supabaseClient';
 
 const AuthContext = createContext<AuthContextType | null>(null)
-type AuthContextType = {
+export type AuthContextType = {
     session: any | null;
     signUpNewUser: (email: string, password: string) => Promise<{success: boolean, data: any}>;
     signInUser: (email: string, password: string) => Promise<{success: boolean, data?: any, error?: string}>;

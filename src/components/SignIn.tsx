@@ -9,8 +9,8 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { session, signInUser } = UserAuth();
-
+  const { session, signInUser } = UserAuth() as { session: any | null; signInUser: (email: string, password: string) => Promise<{success: boolean, data?: any, error?: string}> };
+  console.log(session)
   const navigate = useNavigate()
 
   const handleSubmit = async (e : React.SubmitEvent<HTMLFormElement>) => {
@@ -52,6 +52,7 @@ const SignIn = () => {
           </button>
         </div>
         <p className="text-gray-600">Don't have an account? <Link to="/signUp" className="text-blue-500 hover:text-blue-700">Sign Up!</Link></p>
+      {error && (<p className="text-red-300 text-center">{error}</p>)}
       </form>
     </div>
   )

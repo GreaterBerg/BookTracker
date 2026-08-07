@@ -3,10 +3,15 @@ import App from "./App";
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import HomePage from "./pages/HomePage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export const router = createBrowserRouter([
     { path: "/", element: <App/> },
     { path: "/signIn", element: <SignIn/> },
     { path: "/signUp", element: <SignUp/> },
-    { path: "/home", element: <HomePage/> },
+    { path: "/home", element:
+        <ProtectedRoute>
+            <HomePage/>
+        </ProtectedRoute>
+     },
 ])

@@ -9,7 +9,8 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { session, signUpNewUser } = UserAuth();
+  const { session, signUpNewUser } = UserAuth() as { session: any | null; signUpNewUser: (email: string, password: string) => Promise<{success: boolean, data?: any, error?: string}> };
+  console.log(session)
   const navigate = useNavigate()
 
   const handleSubmit = async (e : React.SubmitEvent<HTMLFormElement>) => {
@@ -31,8 +32,7 @@ const SignUp = () => {
     }
 
   }
-
-  console.log(session)
+  
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       <p className="text-2xl text-gray-700">Sign Up</p>
