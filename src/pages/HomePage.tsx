@@ -1,5 +1,6 @@
 import fetchFn from '../fetchFn'
 import { useQuery } from '@tanstack/react-query'
+import Navbar from '../components/NavBar'
 
 const HomePage = () => {
 
@@ -10,18 +11,8 @@ const HomePage = () => {
 
     return (
         <>
+            <Navbar />
             <h1>HomePage</h1>
-            {isLoading ? (
-                <p className="loading">Loading...</p>
-            ) : isError ? (
-                <p className="error">Error fetching data</p>
-            ) : (
-                <ul>
-                    {books?.docs.map((book: any) => (
-                        <li key={book.key}>{book.name}</li>
-                    ))}
-                </ul>
-            )}
         </>
     )
 }
