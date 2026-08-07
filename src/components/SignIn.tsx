@@ -9,8 +9,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { session, signInUser } = UserAuth() as { session: any | null; signInUser: (email: string, password: string) => Promise<{success: boolean, data?: any, error?: string}> };
-  console.log(session)
+  const { signInUser } = UserAuth() as { session: any | null; signInUser: (email: string, password: string) => Promise<{success: boolean, data?: any, error?: string}> };
   const navigate = useNavigate()
 
   const handleSubmit = async (e : React.SubmitEvent<HTMLFormElement>) => {

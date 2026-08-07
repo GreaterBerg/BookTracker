@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const { session } = UserAuth() as { session: any | null };
     const navigate = useNavigate();
 
-    if (session === undefined) {
+    if (session === null) {
         return <p className="text-center">Loading...</p>;
     }
 
