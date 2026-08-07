@@ -5,6 +5,7 @@ import SignUp from './components/SignUp'
 import HomePage from "./pages/HomePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/NotFound";
+import ProfilePage from "./pages/ProfilePage";
 
 export const router = createBrowserRouter([
     { path: "/", element: <App/> },
@@ -15,5 +16,11 @@ export const router = createBrowserRouter([
             <HomePage/>
         </ProtectedRoute>
      },
+    { path: "/profile", element:
+        <ProtectedRoute>
+            <ProfilePage/>
+        </ProtectedRoute>
+    },
     { path: "*", element: <NotFound/> },
+
 ])
