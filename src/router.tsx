@@ -4,6 +4,7 @@ import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import HomePage from "./pages/HomePage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./components/NotFound";
 
 export const router = createBrowserRouter([
     { path: "/", element: <App/> },
@@ -14,4 +15,5 @@ export const router = createBrowserRouter([
             <HomePage/>
         </ProtectedRoute>
      },
+    { path: "*", element: <NotFound/> },
 ])
