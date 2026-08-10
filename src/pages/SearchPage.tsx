@@ -1,0 +1,50 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query"
+import useDebounce from "../hooks/useDebounce";
+import fetchFn from "../fetchFn";
+import NavBar from "../components/NavBar";
+
+
+const SearchPage = () => {
+
+    const [search, setSearch] = useState("");
+
+    const debouncedSearch = useDebounce(search, 500);
+
+    const { data: searchData, isLoading, error } = useQuery({
+        queryKey: ["search", debouncedSearch],
+        queryFn: () => fetchFn(`https://openlibrary.org/search.json?q=${debouncedSearch}`),
+        enabled: !!debouncedSearch
+    })
+
+    
+    return (
+        <div>
+            <NavBar />
+            <input
+                autoFocus
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search..."
+                className="bg-gray-100 text-gray-900 p-2 rounded m-4 w-70 border border-gray-400 border-2"
+            />
+            <p className="text-sm text-start p-10">Results:</p>
+            <div className="flex flex-wrap">
+                { isLoading ? (
+                    <p>loading...</p>
+                ) : error ? (
+                    <p>error {error.message}</p>
+                ) : searchData?.docs.map((book: any) => (
+                    <div className="flex flex-col bg-gray-200 m-4 w-70 p-4">
+                        <img src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`} alt={`${book.title} Cover`} />
+                        <p>{book.title}</p>
+                        <p>{book.author_name?.map((author: string) => author)}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export default SearchPage

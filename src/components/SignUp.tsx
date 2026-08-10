@@ -92,7 +92,7 @@ const SignUp = () => {
             Sign Up
           </button>
         </div>
-        {error && (<p className="text-red-500 text-center">{error}</p>)}
+        {error && (<p className="text-red-500 w-70">{error}</p>)}
         <p className="text-gray-600">Already have an account? <Link to="/signIn" className="text-blue-500 hover:text-blue-700">Sign In!</Link></p>
       </form>
     </div>
