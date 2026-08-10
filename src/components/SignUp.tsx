@@ -21,7 +21,7 @@ const SignUp = () => {
       const result = await signUpNewUser(email, password);
 
       if (result.success) {
-        navigate("/home")
+        navigate("/profile")
       }
     
     } catch {

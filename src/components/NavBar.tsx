@@ -16,7 +16,7 @@ const NavBar = () => {
     }
 
     return (
-        <nav className="bg-gray-200 flex items-center justify-between m-3 p-3 border border-gray-300 rounded-lg shadow-md">
+        <nav className="bg-gray-200 flex items-center justify-between m-3 p-3 border border-gray-300 rounded-lg shadow-md h-[73px]">
             <p className="text-gray-500 text-xl font-bold cursor-pointer hover:text-gray-400 transition-colors" onClick={() => navigate('/home')}>
                 BookTracker
             </p>

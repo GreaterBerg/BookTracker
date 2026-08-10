@@ -20,7 +20,7 @@ const SignIn = () => {
       const result = await signInUser(email, password);
 
       if (result.success) {
-        navigate("/home")
+        navigate("/profile")
       }
     } catch {
       console.error("There was an error")
