@@ -15,6 +15,13 @@ const SignIn = () => {
   const handleSubmit = async (e : React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
     
     try {
       const result = await signInUser(email, password);

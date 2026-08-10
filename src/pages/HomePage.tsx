@@ -1,4 +1,4 @@
-import fetchFn from '../fetchFn'
+import fetchFn  from '../fetchFn'
 import { useQuery } from '@tanstack/react-query'
 import Navbar from '../components/NavBar'
 
