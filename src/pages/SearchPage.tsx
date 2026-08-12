@@ -3,6 +3,16 @@ import { useQuery } from "@tanstack/react-query"
 import useDebounce from "../hooks/useDebounce";
 import fetchFn from "../fetchFn";
 import NavBar from "../components/NavBar";
+import { SearchIcon } from "lucide-react"
+
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from "../components/ui/input-group"
 
 
 const SearchPage = () => {
@@ -21,14 +31,24 @@ const SearchPage = () => {
     return (
         <div>
             <NavBar />
-            <input
+            {/* <input
                 autoFocus
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search..."
                 className="bg-gray-100 text-gray-900 p-2 rounded m-4 w-70 border border-gray-400 border-2"
-            />
+            /> */}
+            <InputGroup className="w-100 my-4 mx-[auto] text-[var(--white)]">
+                <InputGroupInput
+                    autoFocus
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search..." />
+                <InputGroupAddon>
+                    <SearchIcon />
+                </InputGroupAddon>
+            </InputGroup>
             <p className="text-sm text-start p-10">Results:</p>
             <div className="flex flex-wrap">
                 { isLoading ? (
