@@ -99,7 +99,7 @@
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
+  border-inline: 1px solid var(--gray);
   background-color: var(--bg);
   min-height: 100svh;
   display: flex;
