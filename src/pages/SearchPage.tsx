@@ -8,11 +8,9 @@ import { SearchIcon } from "lucide-react"
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
 } from "../components/ui/input-group"
+import BookCard from "../components/BookCard";
 
 
 const SearchPage = () => {
@@ -50,17 +48,18 @@ const SearchPage = () => {
                 </InputGroupAddon>
             </InputGroup>
             <p className="text-sm text-start p-10">Results:</p>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap m-[0 auto] justify-center">
                 { isLoading ? (
                     <p>loading...</p>
                 ) : error ? (
                     <p>error {error.message}</p>
-                ) : searchData?.docs.map((book: any) => (
-                    <div className="flex flex-col bg-gray-200 m-4 w-70 p-4">
-                        <img src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`} alt={`${book.title} Cover`} />
-                        <p>{book.title}</p>
-                        <p>{book.author_name?.map((author: string) => author)}</p>
-                    </div>
+                ) : searchData?.docs.map((book) => (
+                    // <div className="flex flex-col bg-gray-200 m-4 w-70 p-4">
+                    //     <img src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`} alt={`${book.title} Cover`} />
+                    //     <p>{book.title}</p>
+                    //     <p>{book.author_name?.map((author: string) => author)}</p>
+                    // </div>
+                    <BookCard key={book.key} name={book.title} author={book.author_name} cover={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`} />
                 ))}
             </div>
         </div>
