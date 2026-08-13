@@ -6,9 +6,16 @@ import TiltedCard from "../components/TiltedCard"
 import { Button } from "../components/ui/button"
 import { BookmarkIcon } from "lucide-react"
 import { Heart } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { supabase } from "../supabaseClient"
 
 const DetailsPage = () => {
+
+    
+    const [toggleRead, setToggleRead] = useState(false)
+    const [fillRead, setFillRead] = useState("none")
+    const [toggleFavorite, setToggleFavorite] = useState(false)
+    const [fillFavorite, setFillFavorite] = useState("none")
 
     const { bookId } = useParams()
 
@@ -17,11 +24,70 @@ const DetailsPage = () => {
         queryFn: () => fetchFn(`https://openlibrary.org/works/${bookId}.json`)
     })
 
-    const [toggleRead, setToggleRead] = useState(false)
-    const [fillRead, setFillRead] = useState("none")
+    useEffect(() => {
+        const checkWantToRead = async () => {
+            const { data, error } = await supabase
+            .from("Want To Read")
+            .select("wanted")
+            .eq("book_id", bookId)
+            .maybeSingle()
 
-    const [toggleFavorite, setToggleFavorite] = useState(false)
-    const [fillFavorite, setFillFavorite] = useState("none")
+            if (error) {
+                console.log("error at checkin read list")
+            } else {
+                console.log("book in readlist?", data?.wanted)
+                if (data?.wanted) {
+                    setToggleRead(true)
+                    setFillRead("fill")
+                } else {
+                    setToggleRead(false)
+                    setFillRead("none")
+                }
+            }
+
+        }
+
+        checkWantToRead()
+
+    }, [bookId])
+
+    const handleAddWantToRead = async () => {
+        if (!detailsData) return;
+        
+        const dataWantToRead = {
+            book_name: detailsData?.title,
+            book_id: bookId,
+            wanted: true
+        }
+
+        const { data, error } = await supabase
+        .from("Want To Read")
+        .insert([dataWantToRead])
+        .select()
+        .single()
+
+        if (error) {
+            console.log("error at adding in read list")
+        } else {
+            console.log(`added to read list!`, data)
+        }
+    }
+
+    const handleDeleteWantToRead = async () => {
+        if (!detailsData) return;
+
+        const { error } = await supabase
+        .from("Want To Read")
+        .delete()
+        .eq("book_id", bookId)
+
+        if (error) {
+            console.log("error at deleting from read list")
+        } else {
+            console.log(`deleted from read list!`)
+        }
+    }
+
 
     return (
         <div>
@@ -46,12 +112,14 @@ const DetailsPage = () => {
                 <div className="flex flex-col gap-2 m-10">
                     <Button variant="secondary" size="lg"
                         onClick={() => {
-                            if (toggleRead) {
-                                setFillRead("none");
-                                setToggleRead(false)
-                            } else {
-                                setFillRead("fill");
+                            if (!toggleRead) {
                                 setToggleRead(true)
+                                handleAddWantToRead()
+                                setFillRead("fill");
+                            } else {
+                                setToggleRead(false)
+                                handleDeleteWantToRead()
+                                setFillRead("none");
                             }
                         }}>
                         <BookmarkIcon fill={fillRead} />
@@ -59,12 +127,12 @@ const DetailsPage = () => {
                     </Button>
                     <Button variant="secondary" size="lg"
                         onClick={() => {
-                            if (toggleFavorite) {
-                                setFillFavorite("none");
-                                setToggleFavorite(false)
-                            } else {
+                            if (!toggleFavorite) {
                                 setFillFavorite("fill");
                                 setToggleFavorite(true)
+                            } else {
+                                setFillFavorite("none");
+                                setToggleFavorite(false)
                             }
                         }}>
                         <Heart fill={fillFavorite}/>
