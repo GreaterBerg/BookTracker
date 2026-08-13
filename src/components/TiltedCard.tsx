@@ -107,7 +107,7 @@ export default function TiltedCard({
       )}
 
       <motion.div
-        className="relative [transform-style:preserve-3d]"
+        className="relative [transform-style:preserve-3d] bg-[var(--gray)] rounded-[15px]"
         style={{
           width: imageWidth,
           height: imageHeight,

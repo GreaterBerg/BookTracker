@@ -53,12 +53,7 @@ const SearchPage = () => {
                     <p>loading...</p>
                 ) : error ? (
                     <p>error {error.message}</p>
-                ) : searchData?.docs.map((book) => (
-                    // <div className="flex flex-col bg-gray-200 m-4 w-70 p-4">
-                    //     <img src={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`} alt={`${book.title} Cover`} />
-                    //     <p>{book.title}</p>
-                    //     <p>{book.author_name?.map((author: string) => author)}</p>
-                    // </div>
+                ) : searchData?.docs.map((book: any) => (
                     <BookCard key={book.key} name={book.title} author={book.author_name} cover={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`} />
                 ))}
             </div>

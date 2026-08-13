@@ -1,6 +1,12 @@
 import TiltedCard from "./TiltedCard"
 
-const BookCard = ({ name, author , cover }) => {
+interface BookCard {
+    name: string,
+    author: string | undefined,
+    cover: string | undefined
+}
+
+const BookCard = ({ name, author, cover }: BookCard) => {
     return (
         <div className="m-4">
             <TiltedCard
