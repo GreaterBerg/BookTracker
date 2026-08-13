@@ -47,7 +47,31 @@ const DetailsPage = () => {
 
         }
 
+
+        const checkFavorite = async () => {
+            const { data, error } = await supabase
+            .from("Favorite Books")
+            .select("favorite")
+            .eq("book_id", bookId)
+            .maybeSingle()
+
+            if (error) {
+                console.log("error at checkin favorite")
+            } else {
+                console.log("book in favorites?", data?.favorite)
+                if (data?.favorite) {
+                    setToggleFavorite(true)
+                    setFillFavorite("fill")
+                } else {
+                    setToggleFavorite(false)
+                    setFillFavorite("none")
+                }
+            }
+
+        }
+
         checkWantToRead()
+        checkFavorite()
 
     }, [bookId])
 
@@ -85,6 +109,44 @@ const DetailsPage = () => {
             console.log("error at deleting from read list")
         } else {
             console.log(`deleted from read list!`)
+        }
+    }
+
+    
+    const handleAddFavorite = async () => {
+        if (!detailsData) return;
+        
+        const dataFavorite = {
+            book_name: detailsData?.title,
+            book_id: bookId,
+            favorite: true
+        }
+
+        const { data, error } = await supabase
+        .from("Favorite Books")
+        .insert([dataFavorite])
+        .select()
+        .single()
+
+        if (error) {
+            console.log("error at adding in favorite")
+        } else {
+            console.log(`added to favorite!`, data)
+        }
+    }
+
+    const handleDeleteFavorite = async () => {
+        if (!detailsData) return;
+
+        const { error } = await supabase
+        .from("Favorite Books")
+        .delete()
+        .eq("book_id", bookId)
+
+        if (error) {
+            console.log("error at deleting from favorite")
+        } else {
+            console.log(`deleted from favorite!`)
         }
     }
 
@@ -129,9 +191,11 @@ const DetailsPage = () => {
                         onClick={() => {
                             if (!toggleFavorite) {
                                 setFillFavorite("fill");
+                                handleAddFavorite()
                                 setToggleFavorite(true)
                             } else {
                                 setFillFavorite("none");
+                                handleDeleteFavorite()
                                 setToggleFavorite(false)
                             }
                         }}>
