@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import TiltedCard from "./TiltedCard"
 
 interface BookCard {
@@ -7,8 +8,11 @@ interface BookCard {
 }
 
 const BookCard = ({ name, author, cover }: BookCard) => {
+
+    const navigate = useNavigate();
+
     return (
-        <div className="m-4">
+        <div className="m-4" onClick={() => navigate(`/book/${name}`)}>
             <TiltedCard
                 imageSrc={cover}
                 altText={`${author} - ${name}`}

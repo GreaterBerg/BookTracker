@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./components/NotFound";
 import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./pages/SearchPage";
+import DetailsPage from "./pages/DetailsPage";
 
 export const router = createBrowserRouter([
     { path: "/", element: <App/> },
@@ -23,5 +24,6 @@ export const router = createBrowserRouter([
         </ProtectedRoute>
     },
     { path: "*", element: <NotFound/> },
-    { path: "/search", element: <SearchPage /> }
+    { path: "/search", element: <SearchPage/> },
+    { path: "/book/:bookName", element: <DetailsPage/> }
 ])

@@ -4,6 +4,7 @@ import useDebounce from "../hooks/useDebounce";
 import fetchFn from "../fetchFn";
 import NavBar from "../components/NavBar";
 import { SearchIcon } from "lucide-react"
+import { Skeleton } from "../components/ui/skeleton"
 
 import {
   InputGroup,
@@ -50,7 +51,9 @@ const SearchPage = () => {
             <p className="text-sm text-start p-10">Results:</p>
             <div className="flex flex-wrap m-[0 auto] justify-center">
                 { isLoading ? (
-                    <p>loading...</p>
+                    Array.from({length: 20}).map(() => (
+                        <Skeleton className="h-[350px] w-[250px] rounded-[15px] m-4" />
+                    ))
                 ) : error ? (
                     <p>error {error.message}</p>
                 ) : searchData?.docs.map((book: any) => (
