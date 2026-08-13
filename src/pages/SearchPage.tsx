@@ -30,14 +30,6 @@ const SearchPage = () => {
     return (
         <div>
             <NavBar />
-            {/* <input
-                autoFocus
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search..."
-                className="bg-gray-100 text-gray-900 p-2 rounded m-4 w-70 border border-gray-400 border-2"
-            /> */}
             <InputGroup className="w-100 my-4 mx-[auto] text-[var(--white)]">
                 <InputGroupInput
                     autoFocus
@@ -51,13 +43,13 @@ const SearchPage = () => {
             <p className="text-sm text-start p-10">Results:</p>
             <div className="flex flex-wrap m-[0 auto] justify-center">
                 { isLoading ? (
-                    Array.from({length: 20}).map(() => (
-                        <Skeleton className="h-[350px] w-[250px] rounded-[15px] m-4" />
+                    Array.from({length: 20}).map((_,i) => (
+                        <Skeleton key={i} className="h-[350px] w-[250px] rounded-[15px] m-4" />
                     ))
                 ) : error ? (
                     <p>error {error.message}</p>
                 ) : searchData?.docs.map((book: any) => (
-                    <BookCard key={book.key} name={book.title} author={book.author_name} cover={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`} />
+                    <BookCard key={book.key} id={book.key} name={book.title} author={book.author_name} cover={`https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`} />
                 ))}
             </div>
         </div>

@@ -4,15 +4,16 @@ import TiltedCard from "./TiltedCard"
 interface BookCard {
     name: string,
     author: string | undefined,
-    cover: string | undefined
+    cover: string | undefined,
+    id: string | number | undefined
 }
 
-const BookCard = ({ name, author, cover }: BookCard) => {
+const BookCard = ({ name, author, cover, id }: BookCard) => {
 
     const navigate = useNavigate();
 
     return (
-        <div className="m-4 cursor-pointer shadow-2xl" onClick={() => navigate(`/book/${name}`)}>
+        <div className="m-4 cursor-pointer shadow-2xl" onClick={() => navigate(`/book/${id}`)}>
             <TiltedCard
                 imageSrc={cover}
                 altText={`${author} - ${name}`}
