@@ -2,8 +2,10 @@ import { UserAuth } from '../context/AuthContext'
 
 import { useNavigate } from 'react-router-dom'
 
+import { SearchIcon } from "lucide-react"
+
 const NavBar = () => {
-    const { signOut } = UserAuth();
+    const { signOut } = UserAuth() as {signOut: any};
     const navigate = useNavigate();
 
     const handleSignOut = async (e) => {
@@ -22,6 +24,9 @@ const NavBar = () => {
                 BookTracker
             </p>
             <div className="flex items-center gap-4">
+
+                <p onClick={() => navigate("/search")} className='cursor-pointer flex gap-1'><SearchIcon className='pt-1 m-0'/> Search </p>
+
                 <p onClick={() => navigate('/profile')} className="hover:text-[var(--brown)] cursor-pointer transition-colors">
                     Profile
                 </p>
