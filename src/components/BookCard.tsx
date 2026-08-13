@@ -12,7 +12,7 @@ const BookCard = ({ name, author, cover }: BookCard) => {
     const navigate = useNavigate();
 
     return (
-        <div className="m-4" onClick={() => navigate(`/book/${name}`)}>
+        <div className="m-4 cursor-pointer shadow-2xl" onClick={() => navigate(`/book/${name}`)}>
             <TiltedCard
                 imageSrc={cover}
                 altText={`${author} - ${name}`}

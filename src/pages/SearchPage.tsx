@@ -23,7 +23,7 @@ const SearchPage = () => {
     const { data: searchData, isLoading, error } = useQuery({
         queryKey: ["search", debouncedSearch],
         queryFn: () => fetchFn(`https://openlibrary.org/search.json?q=${debouncedSearch}`),
-        enabled: !!debouncedSearch
+        enabled: debouncedSearch.trim().length >= 3
     })
 
     
