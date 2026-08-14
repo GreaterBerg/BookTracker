@@ -185,7 +185,7 @@ const DetailsPage = () => {
                             }
                         }}>
                         <BookmarkIcon fill={fillRead} />
-                        Want to Read
+                        {!toggleRead ? (<>Want to Read</>) : (<>In Read List</>)}
                     </Button>
                     <Button variant="secondary" size="lg"
                         onClick={() => {
@@ -200,7 +200,7 @@ const DetailsPage = () => {
                             }
                         }}>
                         <Heart fill={fillFavorite}/>
-                        Add to Favorite
+                        {!toggleFavorite ? (<>Add to Favorite</>) : (<>In Favorite List!</>)}
                     </Button>
                 </div>
             </section>
