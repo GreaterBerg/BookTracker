@@ -1,75 +1,98 @@
-# React + TypeScript + Vite
+# BookTracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A book tracking web application built with React and TypeScript.
 
-Currently, two official plugins are available:
+The project is currently in active development. I use it to practice building a more feature-rich frontend application and working with modern tools for server state, authentication, database interaction, and UI development.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Current Features
 
-## React Compiler
+* User authentication
+* Create, read, update and delete books
+* Book status tracking
+* Pagination
+* Search
+* User-specific data
+* Loading and error states
+* Responsive UI
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+* React
+* TypeScript
+* React Router
+* TanStack Query
+* Supabase
+* Tailwind CSS
+* shadcn/ui
+* Vite
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Architecture
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The application is built around several main areas:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+src/
+├── components/    # Reusable UI components
+├── context/       # Global application context
+├── hooks/         # Custom React hooks
+├── lib/           # Shared utilities and configuration
+├── pages/         # Application pages
+├── router/        # Routing
+├── types/         # TypeScript types
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The project uses **TanStack Query** for server state and data fetching, while authentication is handled through **Supabase**.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Goals
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The main goal of the project is to gain practical experience with:
 
+* TypeScript in a real application
+* Server-state management with TanStack Query
+* Authentication and database interaction with Supabase
+* CRUD operations
+* Client-side routing
+* Reusable React components and hooks
+* Form handling and validation
+* Testing
+* Building and deploying a frontend application
+
+## Development Status
+
+🚧 **Work in progress**
+
+The application is still being developed. Some parts of the architecture, TypeScript types, error handling, testing, and UI are subject to change as the project evolves.
+
+## Planned Improvements
+
+* Improve TypeScript coverage and remove remaining `any` usages
+* Improve error handling
+* Add more comprehensive tests
+* Refine application architecture
+* Improve accessibility
+* Further improve UI/UX
+* Add additional book-related features
+
+## Running Locally
+
+### Requirements
+
+* Node.js
+* npm
+
+### Installation
+
+```bash id="j0l1k4"
+git clone https://github.com/GreaterBerg/BookTracker.git
+cd BookTracker
+npm install
 ```
+
+### Development
+
+```bash id="u5j8q0"
+npm run dev
+```
+
+The application will be available at the local development URL provided by Vite.
