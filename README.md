@@ -1,5 +1,8 @@
 # BookTracker
 
+<img width="798" height="819" alt="image" src="https://github.com/user-attachments/assets/77b48de3-1936-49a2-a8b5-9f27a52b21ee" />
+
+
 A book tracking web application built with React and TypeScript.
 
 The project is currently in active development. I use it to practice building a more feature-rich frontend application and working with modern tools for server state, authentication, database interaction, and UI development.
@@ -25,6 +28,9 @@ The project is currently in active development. I use it to practice building a 
 * Tailwind CSS
 * shadcn/ui
 * Vite
+
+<img width="1420" height="878" alt="image" src="https://github.com/user-attachments/assets/d8784b0a-09fd-488e-94cd-719a96928a26" />
+
 
 ## Architecture
 
